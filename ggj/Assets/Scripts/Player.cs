@@ -74,14 +74,14 @@ public class Player : MonoBehaviour
 
 
     [Header("Regular Bullet Variables")]
-    [Header("Timer between shots")]
+    [Header("Timer between regular LC shots")]
     [Space]
     [Range(0.0f, 20.0f)]
     [SerializeField] public float bulletDamage;
 
     
 
-    [Header("Timer between shots")]
+    [Header("Timer between regular LC shots")]
     [Space]
     [Range(0.0f, 10.0f)]
     [SerializeField] private float shotsTimer;
