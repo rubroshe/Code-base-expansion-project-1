@@ -325,13 +325,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (player.isDashing)
-        {
+        
+        
             if (other.gameObject.CompareTag("Enemy"))
             {
                 playerHP = playerHP - damageFromEnemy;
             }
-        }
+        
     }
 
     private void OnTriggerStay(Collider other)
