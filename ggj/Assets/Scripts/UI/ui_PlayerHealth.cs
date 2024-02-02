@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ui_PlayerHealth : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
+    public Player playerHealth;
 
     Slider slider;
 
@@ -16,6 +16,6 @@ public class ui_PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        slider.value = playerHealth.playerHealth;
+        slider.value = playerHealth.playerHP; // what do i put here
     }
 }

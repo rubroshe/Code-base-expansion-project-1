@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -37,13 +38,30 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        transform.Translate(new Vector3(x, 0, z) * (moveSpeed * Time.deltaTime));
+        // FIX THIS transform.Translate(new Vector3(x, 0, z) * (moveSpeed * Time.deltaTime));
+        Vector3 moveDirection = new Vector3(x, 0, z).normalized;
+        // moveDirection.Normalize();
+
+        /*// convert to world space
+        moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection = new Vector3(moveDirection.x, 0, moveDirection.z);*/
+
+        // apply in world space
+        rb.MovePosition(rb.position + moveDirection * (moveSpeed * Time.deltaTime));
 
         if (Input.GetKey(KeyCode.Space) && isDashing)
         {
             trail.SetActive(true);
-            rb.AddForce(this.transform.forward * dashSpeed, ForceMode.Impulse);
-
+             // FIX THIS rb.AddForce(this.transform.forward * dashSpeed, ForceMode.Impulse);
+            if (moveDirection != Vector3.zero)
+            {
+                rb.AddForce(moveDirection * dashSpeed, ForceMode.Impulse);
+            }
+            else
+            {
+                rb.AddForce(transform.forward * dashSpeed, ForceMode.Impulse);
+            }
+            
             isDashing = false;
             StartCoroutine(Dash());
         }
